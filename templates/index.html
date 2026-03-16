@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HIBP Breach Checker</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; }
+    input, button { padding: 10px; font-size: 16px; }
+    .error { color: #b00020; }
+    .result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>HIBP Breach Checker</h1>
+  <form action="/check" method="post">
+    <input type="email" name="email" placeholder="Enter email address" required>
+    <button type="submit">Check</button>
+  </form>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  {% if email %}
+    <div class="result">
+      <h2>Results for {{ email }}</h2>
+
+      {% if breaches is not none %}
+        {% if breaches|length == 0 %}
+          <p>No breach found.</p>
+        {% else %}
+          <p>Breaches found: {{ breaches|length }}</p>
+          <ul>
+            {% for breach in breaches %}
+              <li>
+                <strong>{{ breach.Name }}</strong> —
+                {{ breach.Title }} ({{ breach.BreachDate }})
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+</body>
+</html>
