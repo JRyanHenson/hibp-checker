@@ -18,6 +18,10 @@ FROM python:3.12-slim AS runner
 # Create a non-root system user.
 # If this container is ever compromised, the attacker gets a low-priv
 # user with no shell and no home directory — not root.
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN useradd --system --uid 1001 --no-create-home appuser
 
 WORKDIR /app
