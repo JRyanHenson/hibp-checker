@@ -29,7 +29,7 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
 
     - run: pip install bandit
 
@@ -50,7 +50,7 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
 
     - run: pip install pip-audit
 
@@ -82,7 +82,7 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        python-version: "3.13"
 
     - run: pip install -r requirements.txt
 
@@ -124,7 +124,7 @@ jobs:
       # Scans OS packages and Python packages inside the final
       # image for known CVEs. Fails the pipeline on CRITICAL or
       # HIGH findings — image is never pushed if this fails.
-      uses: aquasecurity/trivy-action@master
+      uses: aquasecurity/trivy-action@0.32.0
       with:
         image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
         exit-code: '1'
