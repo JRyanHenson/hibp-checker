@@ -6,7 +6,8 @@ on:
   pull_request:
     branches: [ main ]
   schedule:
-  # Weekly rebuild pulls latest base image security patches
+  # Weekly security scans (pip-audit, Bandit, Gitleaks) catch newly
+  # disclosed CVEs. Base image patches arrive via Dependabot digest PRs.
   - cron: '0 0 * * 0'
 
 env:

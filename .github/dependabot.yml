@@ -1,0 +1,29 @@
+# Dependabot keeps the base image, Python packages, and Actions current.
+# The base image is pinned by digest, so when Docker republishes
+# python:3.13-slim with OS security patches, Dependabot opens a PR to
+# bump the digest. Merging it runs the full gated pipeline and redeploys.
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      base-image:
+        patterns: ["*"]
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python-deps:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
