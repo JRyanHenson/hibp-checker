@@ -1,7 +1,7 @@
 # ── Stage 1: Builder ──────────────────────────────────────────
 # Install dependencies here. This stage has pip and build tools.
 # None of that makes it into the final image.
-FROM python:3.13-slim AS builder
+FROM python:3.13-slim@sha256:09a17cad02668ae61ece136b4fd36ac3849e14f670ebedb637ea3e15580525bc AS builder
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 
 # ── Stage 2: Runner ───────────────────────────────────────────
 # Lean runtime image. No pip. No build tools. No root.
-FROM python:3.13-slim AS runner
+FROM python:3.13-slim@sha256:09a17cad02668ae61ece136b4fd36ac3849e14f670ebedb637ea3e15580525bc AS runner
 
 # Create a non-root system user.
 # If this container is ever compromised, the attacker gets a low-priv
